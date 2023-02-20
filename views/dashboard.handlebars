@@ -1,0 +1,13 @@
+<div>
+<a href="/dashboard/new"><button type="button" class="btn btn-primary btn-lg">Create a New Post</button></a>
+</div>
+
+{{#each blogs }}
+<div class="card">
+<div class="card-body">
+  <a href="/dashboard/edit/{{blogs.id}}">
+        <h3>{{blogs.title}}</h3>
+  </a>
+</div>
+</div>
+{{/each}}
