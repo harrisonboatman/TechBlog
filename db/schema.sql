@@ -1,3 +1,3 @@
 DROP DATABASE IF EXISTS tech_db;
 
-ADD DATABASE tech_db
+CREATE DATABASE tech_db
