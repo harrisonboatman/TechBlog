@@ -6,7 +6,9 @@ router.get('/', async (req, res) => {
     try {
         const blogData = await Blog.findAll( {
             include: [
-                {model: User
+                {model: User,
+                    attributes: ['username'],
+
                 }
             ]
         });
@@ -26,19 +28,48 @@ router.get('/blog/:id', withAuth, async (req, res)=> {
         const blogData = await Blog.findByPK(req.params.id, {
             include: [
                 {
-                    model: User
+                    model: User,
+                    attributes: ['username'],
+
                 }
             ]
-        })
+        });
+const commentData = await Comment.findAll({
+    where: {
+        blog_id: req.params.id
+    },
+    include: [
+        {
+            model: User,
+            attributes: ['username']
+        }
+    ]
+});
+
+
         const blog = blogData.get({ plain: true});
+        const comment = commentData.map((comment) => {
+            comment.get({ plain: true })
+        });
+
 
         res.render('viewPost', {
             ...blog,
-            logged_in: req.session.logged_in
+            comment,
+            logged_in: req.session.logged_in,
+            username:req.session.username
         })
     } catch (err) {
         res.status(500).json(err)
     }
 });
 
+
+router.get('/login', (req, res) => {
+    if (req.session.logged_in) {
+      res.redirect('/');
+      return;
+    }
+    res.render('login');
+  });
 module.exports = router

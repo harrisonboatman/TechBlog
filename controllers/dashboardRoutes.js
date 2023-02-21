@@ -14,12 +14,24 @@ router.get('/', withAuth, async (req,res) => {
 
         res.render('dashboard', {
             blogs,
-            username:req.session.username,
+            username: req.session.username,
             logged_in: req.session.logged_in
         });
 
     } catch (err) {
         res.status(500).json(err)
+    }
+});
+
+router.get('/newPost', withAuth, async (req, res) => {
+    try {
+      res.render('newPost', {
+        username: req.session.username,
+        user_id: req.session.user_id,
+        logged_in: req.session.logged_in
+      });
+    } catch (err) {
+      res.status(500).json(err);
     }
 });
 

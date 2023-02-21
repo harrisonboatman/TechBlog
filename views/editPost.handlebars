@@ -1,0 +1,22 @@
+<h2>Edit Post <a href="/dashboard" class="exit-btn">X</a></h2>
+
+<form class="form " id = 'editPostForm'data-id="{{post.id}}">
+<div class="mb-3 form-group">
+  <label for="editPost-title" class="editPost-form">Title:</label>
+  <textarea class="form-input" id="editPost-title" rows="1" maxlength="50">{{blogs.title}}</textarea>
+</div>
+<div class="mb-3 form-group">
+  <label for="editPost-contents" class="editPost-form">Content:</label>
+  <textarea class="form-input" id="editPost-contents" rows="3" maxlength="255">{{blogs.content}}</textarea>
+</div>
+<div class="form-group">
+  <button type="submit" class="btn btn-primary btn-lg">Update</button>
+  <button type="click" data-id="{{post.id}}" class="deletePost-btn btn btn-danger btn-lg" >Delete</button>
+</div>
+</form>
+
+
+<script src="/js/editPost.js"></script>
+
+<h1>Edit Post Here<a href = '/dashboard' class = 'exit-btn'>x</a></h1>
+
