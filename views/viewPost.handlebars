@@ -13,7 +13,7 @@
 {{#if logged_in}}
 <div class="card">
     <div class="card-body">
-        <form class="form" id='newCommentForm' data-id="{{id}}">
+        <form class="form" id='newCommentForm' data-id={{id}}>
             <div class="mb-3 form-group">
                 <label for="newComment" class="newComment-form">Comment:</label>
                 <textarea class="form-input" id="newComment" rows="2" maxlength="255"></textarea>
@@ -28,16 +28,12 @@
 <script src="/js/comment.js"></script>
 {{/if}}
 
-{{blogs.content}}
-{{#each blogs}}
+{{#each comments}}
 <div class="card">
     <div class="card-body">
-        {{!-- <p>{{format_date createdAt}}</p> --}}
-        {{!-- <h4><b>{{user.username}}</b></h4> --}}
-        <h1>Hello</h1>
-        <h1>{{comments.body}}</h1>
-
-        <p>{{id}}</p>
+        <p>Comment creator: {{format_date createdAt}}</p>
+        <h4><b>Comment made by :{{user.username}}</b></h4>
+        <h1>{{body}}</h1>
     </div>
 </div>
 {{/each}}

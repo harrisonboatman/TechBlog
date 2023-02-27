@@ -24,41 +24,42 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/blog/:id', withAuth, (req, res) => {
-  Blog.findByPk( req.params.id,{
-    include: [
-      User,
-      {
-        model: Comment,
-        // attributes: ['id', 'body', 'blog_id', 'user_id' ],
-        include: [User]
-      }
-
-    ]
-})
-    .then(dbPostData => {
-      if (!dbPostData) {
-        res.status(404).json({ message: 'No post found with this id' });
-        return;
-      }
-
-      // serialize the data
-      const blogs = dbPostData.get({ plain: true });
-      console.log(blogs);
-    
-      // pass data to template
-      res.render('viewPost', {
-        blogs, logged_in: req.session.logged_in
-      }
-
-      );
-      // res.json(blog)
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
+router.get('/blog/:id', async (req, res) => {
+  try {
+    // finds a post by primary key(id) with the 'username' of the associated User
+    const blogData = await Blog.findByPk(req.params.id, {
+      include: [
+        {model: User},
+      ],
     });
+
+    // finds all comments related to the post's 'id', along with the 'username' of each comment's associated User
+    const commentData = await Comment.findAll({
+      where: {
+        blog_id: req.params.id,
+      },
+      include: [
+        {model: User},
+      ],
+    });
+
+    const blog = blogData.get({ plain: true });
+
+    const comments = commentData.map((comment) =>
+    comment.get({ plain: true })
+    );
+console.log(blog)
+    res.render('viewPost', {
+      blog,
+      comments,
+      username: req.session.username,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
+
 
 router.get('/login', (req, res) => {
   if (req.session.logged_in) {

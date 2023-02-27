@@ -1,15 +1,17 @@
 <h1>CREATE NEW POST <a href = '/dashboard' class = 'exit-btn'>x</a></h1>
 
-<form class = 'form' id = 'newBlogForm'>
+<form class = 'form newBlog-Form'>
     <div class = 'mb-3 form-group'>
         <label for="newBlogTitle" class="newBlogForm">Title:</label>
     <input class="form-input" id="newBlogTitle" type="text">
     </div>
     <div class="mb-3 form-group">
     <label for="newBlogBody" class="newBlogForm">Content:</label>
-    <textarea class="form-input" id="newBlogBody" ></textarea>
+    <textarea class="form-input" id="newBlogBody" rows="3" maxlength="255"></textarea>
   </div>
   <div class="form-group">
-    <button class="btn btn-secondary" type="submit">Create</button>
+    <button class="btn btn-secondary" id ='blogBtn' type="submit" >Create</button>
   </div>
 </form>
+
+<script src = '/js/newPost.js'></script>

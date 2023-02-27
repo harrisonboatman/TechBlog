@@ -1,18 +1,20 @@
 const newPostHandle = async (event) => {
     event.preventDefault();
-
     const title = document.querySelector('#newBlogTitle').value.trim();
-    const BlogBody = document.querySelector('#newBlogBody').value.trim();
+    const content = document.querySelector('#newBlogBody').value.trim();
+    console.log(title)
+    console.log(BlogBody)
 
 
-    const blogResponse = await fetch('/api/blog', {
+    const response = await fetch('/api/blog', {
         method: 'POST',
-        body: JSON.stringify({ title, BlogBody }),
+        body: JSON.stringify({ title, content }),
         headers: { 'Content-Type': 'application/json' },
     });
     
-    if (blogResponse.ok) {
-        document.location.replace('/dashboard')
+    if (response.ok) {
+        document.location.replace('/homepage')
+        console.log("nice")
     }else {
         alert("Ya MESSED UP")
     }
@@ -20,5 +22,5 @@ const newPostHandle = async (event) => {
 }
 
 document
-    .querySelector('#newBlogForm')
+    .querySelector('.newBlog-Form')
     .addEventListener('submit', newPostHandle);
