@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
 
 
 router.post('/login', async (req, res) => {
-    // try {
+    try {
         const userData = await User.findOne({ where: { username: req.body.username } });
 
         if (!userData) {
@@ -46,9 +46,9 @@ router.post('/login', async (req, res) => {
             res.json({ user: userData, message: 'You are now logged in!' });
         });
 
-    // } catch (err) {
-    //     res.status(400).json('you messed up');
-    // }
+    } catch (err) {
+        res.status(400).json('you messed up');
+    }
 });
 
 router.post('/logout', (req, res) => {
