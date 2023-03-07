@@ -4,6 +4,7 @@ const newComment = async (event) => {
     const blog_id = event.target.getAttribute('data-id');
     const body = document.querySelector('#newComment').value.trim();
     console.log(blog_id)
+    console.log(body)
     const response = await fetch('/api/comment', {
         method: 'POST',
         body: JSON.stringify({blog_id, body}),

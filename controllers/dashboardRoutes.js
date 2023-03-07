@@ -11,10 +11,12 @@ router.get('/', withAuth, async (req,res) => {
         });
 
         const blogs = blogData.map((blog)=> blog.get({ plain: true }));
-
+console.log(blogs)
         res.render('dashboard', {
             blogs,
             username: req.session.username,
+            user_id: req.session.user_id,
+
             logged_in: req.session.logged_in
         });
 
@@ -47,8 +49,8 @@ router.get('/update/:id', withAuth, async(req,res) => {
 
         res.render('editPost', {
             blog, 
-            username: req.session.username,
-            user_id:req.session.user_id,
+            // username: req.session.username,
+            // user_id:req.session.user_id,
             logged_in: req.session.logged_in
         })
     } catch (err) {

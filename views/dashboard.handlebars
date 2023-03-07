@@ -1,12 +1,12 @@
 <div>
 <a href="/dashboard/newPost"><button type="button" class="btn btn-primary btn-lg">Create a New Post</button></a>
 </div>
-
-{{#each blogs }}
+{{#each blogs as |blog|}}
 <div class="card">
 <div class="card-body">
-  <a href="/dashboard/edit/{{blogs.id}}">
-        <h3>{{blogs.title}}</h3>
+  <a href="/dashboard/update/{{blog.id}}">
+        <h3>{{blog.title}}</h3>
+        <p>safdsfda</p>
   </a>
 </div>
 </div>

@@ -3,7 +3,7 @@ const newPostHandle = async (event) => {
     const title = document.querySelector('#newBlogTitle').value.trim();
     const content = document.querySelector('#newBlogBody').value.trim();
     console.log(title)
-    console.log(BlogBody)
+    console.log(content)
 
 
     const response = await fetch('/api/blog', {
@@ -13,7 +13,7 @@ const newPostHandle = async (event) => {
     });
     
     if (response.ok) {
-        document.location.replace('/homepage')
+        document.location.replace('/')
         console.log("nice")
     }else {
         alert("Ya MESSED UP")

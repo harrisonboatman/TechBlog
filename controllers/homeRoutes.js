@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { Blog, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
-router.get('/', async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
   try {
     const blogData = await Blog.findAll({
       include: [
@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/blog/:id', async (req, res) => {
+router.get('/blog/:id', withAuth, async (req, res) => {
   try {
     // finds a post by primary key(id) with the 'username' of the associated User
     const blogData = await Blog.findByPk(req.params.id, {
@@ -50,7 +50,7 @@ router.get('/blog/:id', async (req, res) => {
     );
 console.log(blog)
     res.render('viewPost', {
-      blog,
+      ...blog,
       comments,
       username: req.session.username,
       logged_in: req.session.logged_in
